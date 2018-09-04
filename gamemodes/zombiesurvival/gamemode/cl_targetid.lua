@@ -94,7 +94,8 @@ function GM:DrawTargetID(ent, fade)
 		end
 	end
 end
-
+local sUse = string.upper(input.LookupBinding("use"))
+local sShowTeam = string.upper(input.LookupBinding("gm_showteam"))
 function GM:DrawSigilTargetHint(ent, fade)
 	fade = fade or 1
 	local pos = ent:GetPos()
@@ -108,7 +109,10 @@ function GM:DrawSigilTargetHint(ent, fade)
 	draw.SimpleTextBlur("Sigil", "ZSHUDFontSmaller", x, y, colTemp, TEXT_ALIGN_CENTER)
 	y = y + draw.GetFontHeight("ZSHUDFontSmaller") + 0
 
-	draw.SimpleTextBlur("Press E to teleport", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
+	draw.SimpleTextBlur("Press ".. sUse .." to teleport", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
+	y = y + draw.GetFontHeight("ZSHUDFontSmaller") - draw.GetFontHeight("ZSHUDFontSmaller")/2
+
+	draw.SimpleTextBlur("Press ".. sShowTeam .." to access the point shop", "ZSHUDFontTiny", x, y, colTemp, TEXT_ALIGN_CENTER)
 end
 
 GM.TraceTarget = NULL

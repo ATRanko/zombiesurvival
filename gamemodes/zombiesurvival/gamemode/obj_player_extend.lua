@@ -225,6 +225,18 @@ function meta:MeleeViewPunch(damage)
 	self:ViewPunch(Angle(math.Rand(minpunch, maxpunch), math.Rand(minpunch, maxpunch), math.Rand(minpunch, maxpunch)))
 end
 
+function meta:NearUncorruptedSigil()
+	local pos = self:EyePos()
+	for _, ent in pairs(ents.FindByClass("prop_obj_sigil")) do
+		local nearest = ent:NearestPoint(pos)
+		if (not ent:GetSigilCorrupted()) and (pos:DistToSqr(nearest) <= 10000 and (WorldVisible(pos, nearest) or self:TraceLine(100).Entity == ent))then
+			return true
+		end
+	end
+
+	return false
+end
+
 function meta:NearArsenalCrate()
 	local pos = self:EyePos()
 
